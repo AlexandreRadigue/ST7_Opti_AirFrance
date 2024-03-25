@@ -32,7 +32,7 @@ max_choices = 5
 max_try=5
 
 
-def Options(group_nbr, ChosenSeats = set(), RegisteredGroups =set(),Passengers_Assign_Dict = PassengersAssignOptimDict.copy() , Seats_Assign_Dict = SeatsAssignOptimDict.copy() ,max_choices = 5, max_try=5):
+def Options(group_nbr):
 
     '''
     This function registers a given group
@@ -66,23 +66,26 @@ def Options(group_nbr, ChosenSeats = set(), RegisteredGroups =set(),Passengers_A
     
         return All_options , score_choice, score_register
     
-def updating(group_nbr, chosenAllocation_nbr, ChosenSeats = set(), RegisteredGroups =set(),Passengers_Assign_Dict = PassengersAssignOptimDict.copy() , Seats_Assign_Dict = SeatsAssignOptimDict.copy() ,max_choices = 5, max_try=5):
+def updating(group_nbr, chosenAllocation_nbr):
 
-    choices , _ , _ = Options(group_nbr, ChosenSeats , RegisteredGroups ,Passengers_Assign_Dict, Seats_Assign_Dict,max_choices, max_try)
-
+    choices , _ , _ = Options(group_nbr)
+    
+    global RegisteredGroups
     RegisteredGroups.add(group_nbr)
 
 
     chosenAllocation = choices[chosenAllocation_nbr -1]
+    global ChosenSeats
     ChosenSeats.update(seat for seat in chosenAllocation)
 
     optimal_allocation_group = [(seat[0], seat[1],Seats_Assign_Dict[seat]) for seat in choices[0] ]
     chosen_allocation_group = [(seat[0], seat[1],Seats_Assign_Dict[seat]) for seat in choices[chosenAllocation_nbr -1] ]
-    PassengersAssignDict , SeatsAssignDict = permutation(optimal_allocation_group,chosen_allocation_group,Passengers_Assign_Dict,Seats_Assign_Dict)
+    global Passengers_Assign_Dict , Seats_Assign_Dict
+    Passengers_Assign_Dict , Seats_Assign_Dict = permutation(optimal_allocation_group,chosen_allocation_group,Passengers_Assign_Dict,Seats_Assign_Dict)
 
 
 
-    return ChosenSeats , RegisteredGroups ,  PassengersAssignDict , SeatsAssignDict
+    
     
 
 
