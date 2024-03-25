@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Seats Allocation</title>
+    <link rel="stylesheet" type="text/css" href="./static/css/style.css">
+    <mata charset="UTF-8">
+    <meta name="viewport" content="width=100">
+    <script src="./static/js/validateGN.js" defer></script>
+    
+    
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://www.centralesupelec.fr/sites/all/themes/cs_theme/medias/common/images/intro/logo.png" alt="Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a >Home</a></li>
+                <li><a >About</a></li>
+                <li><a >Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <form method="post">
+        <label for="group-number">Group Number:</label>
+        <input type="text" id="group-number" name="group-number" required>
+        <br>
+        <span id="error-message" class="error-message" style="display: none; color: red; font-size: 14px; margin-top: 5px;">Not a valid group number</span>
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+   
+</body>
+</html>
