@@ -50,9 +50,10 @@ h1 {
 }
 
 
-.container {
-    margin: 20px auto;
+.seatContainer {
+    margin-top: 50px;
     text-align: center;
+
 }
 
 .screen {
@@ -60,6 +61,7 @@ h1 {
     color: #fff;
     padding: 10px;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .row {
