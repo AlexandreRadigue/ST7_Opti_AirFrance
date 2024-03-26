@@ -5,6 +5,7 @@ import pandas as pd
 #from dynamicModel import possible_permutations , scoreAllocation , permutation
 
 
+
 pathSeats = "./ST7 -Airfrance - Dynamique/SeatsDict_22Oct.json"
 pathPassengers = "./ST7 -Airfrance - Dynamique/PassengersDict_22Oct.json"
 pathGroups = "./ST7 -Airfrance - Dynamique/AllGroups_22Oct.json"
@@ -34,7 +35,7 @@ RegisteredGroups = set()
 Passengers_Assign_Dict = PassengersAssignOptimDict.copy()
 Seats_Assign_Dict = SeatsAssignOptimDict.copy()
 max_choices = 5
-max_try=5
+max_try = 5
 
 #Uploading df
 
@@ -344,8 +345,7 @@ def scoreAllocation(allocations_list):
 #Functions to call
 
 def Options(group_nbr):
-
-    '''
+    """
     This function registers a given group
     """
 
@@ -395,14 +395,20 @@ def updating(group_nbr, chosenAllocation_nbr):
     global ChosenSeats
     ChosenSeats.update(seat for seat in chosenAllocation)
 
-    optimal_allocation_group = [(seat[0], seat[1],Seats_Assign_Dict[seat]) for seat in choices[0] ]
-    chosen_allocation_group = [(seat[0], seat[1],Seats_Assign_Dict[seat]) for seat in choices[chosenAllocation_nbr -1] ]
-    global Passengers_Assign_Dict , Seats_Assign_Dict
-    Passengers_Assign_Dict , Seats_Assign_Dict = permutation(optimal_allocation_group,chosen_allocation_group,Passengers_Assign_Dict,Seats_Assign_Dict)
+    optimal_allocation_group = [
+        (seat[0], seat[1], Seats_Assign_Dict[seat]) for seat in choices[0]
+    ]
+    chosen_allocation_group = [
+        (seat[0], seat[1], Seats_Assign_Dict[seat])
+        for seat in choices[chosenAllocation_nbr - 1]
+    ]
+    global Passengers_Assign_Dict, Seats_Assign_Dict
+    Passengers_Assign_Dict, Seats_Assign_Dict = permutation(
+        optimal_allocation_group,
+        chosen_allocation_group,
+        Passengers_Assign_Dict,
+        Seats_Assign_Dict,
+    )
 
-print(Options(1)[1])
 
-    
-    
-
-
+Options(2)
