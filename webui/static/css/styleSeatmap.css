@@ -50,10 +50,11 @@ h1 {
 }
 
 
-.seatContainer {
-    margin-top: 50px;
+.seatmap {
+    margin-top: 80px;
+    margin-left: 70px;
+    margin-right: 70px;
     text-align: center;
-
 }
 
 .screen {
@@ -84,4 +85,20 @@ h1 {
 
 .seat:hover {
     background-color: #aaa;
+
+}
+
+.available {
+    background-color: #b9f6ca;
+    border: 1px solid #999;
+    padding: 10px;
+    margin: 5px 0;
+    width: 40px;
+    height: 40px;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.available:hover {
+    background-color: #96e6a1;
 }

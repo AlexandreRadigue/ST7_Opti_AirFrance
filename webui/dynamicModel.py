@@ -2,7 +2,7 @@ import json
 import ast
 import random
 
-# from dynamicModel import possible_permutations, scoreAllocation, permutation
+from dynamicModel import possible_permutations, scoreAllocation, permutation
 
 
 pathSeats = "./ST7 -Airfrance - Dynamique/SeatsDict_22Oct.json"

@@ -3,8 +3,9 @@
 <head>
     <title>Seats Map</title>
     <link rel="stylesheet" type="text/css" href="./static/css/styleSeatmap.css">
-    <mata charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=100">
+    <script>  const availableSeats = '{{ availableSeats|tojson|safe }}' </script>
 </head>
 <body>
     <header>
@@ -19,7 +20,8 @@
             </ul>
         </nav>
     </header>
-    <script src="./static/js/seatsGeneration.js" defer></script>
+    <script src="./static/js/seatsGeneration.js">
+    </script>
 </body>
 </html>
        
