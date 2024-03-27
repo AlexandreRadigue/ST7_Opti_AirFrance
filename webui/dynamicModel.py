@@ -528,4 +528,3 @@ def updating_convert(chosenAllocation_nbr):
 
     conv_tuple = [(int(chosenAllocation_nbr[:-1]), conv[chosenAllocation_nbr[-1]])]
     updating(current_seats.index(conv_tuple), current_group)
-
