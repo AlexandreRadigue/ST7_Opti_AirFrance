@@ -534,6 +534,3 @@ def updating_convert(chosenAllocation_nbr):
     updating(current_seats[chosenAllocation_nbr], current_group)
     current_seats = {}
     return False
-
-
-print(Options(47))
