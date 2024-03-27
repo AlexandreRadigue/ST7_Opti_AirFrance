@@ -51,9 +51,10 @@ h1 {
 
 
 .seatmap {
+    display: inline-block;
     margin-top: 80px;
-    margin-left: 70px;
-    margin-right: 70px;
+    margin-left: 5px;
+    margin-right: 10px;
     text-align: center;
 }
 
@@ -63,6 +64,7 @@ h1 {
     padding: 10px;
     margin-bottom: 10px;
     text-align: center;
+    border-radius: 4px;
 }
 
 .row {
@@ -77,10 +79,12 @@ h1 {
     border: 1px solid #999;
     padding: 10px;
     margin: 5px 0;
-    width: 40px;
+    width: 30px;
     height: 40px;
     line-height: 20px;
     cursor: pointer;
+    border-radius: 4px;
+    margin: 0.5px 0.5px;
 }
 
 .seat:hover {
@@ -93,10 +97,12 @@ h1 {
     border: 1px solid #999;
     padding: 10px;
     margin: 5px 0;
-    width: 40px;
+    width: 30px;
     height: 40px;
     line-height: 20px;
     cursor: pointer;
+    border-radius: 4px;
+    margin: 0.5px 0.5px;
 }
 
 .available:hover {
