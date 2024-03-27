@@ -5,7 +5,6 @@ window.onload = function () {
 
     form.addEventListener("submit", function (event) {
         var groupNumber = parseInt(groupNumberInput.value);
-
         if (isNaN(groupNumber) || groupNumber % 1 !== 0) {
             errorMessage.style.display = "inline";
             event.preventDefault();

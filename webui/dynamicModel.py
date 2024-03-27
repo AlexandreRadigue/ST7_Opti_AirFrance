@@ -9,7 +9,8 @@ import pandas as pd
 pathSeats = "./ST7 -Airfrance - Dynamique/SeatsDict_22Oct.json"
 pathPassengers = "./ST7 -Airfrance - Dynamique/PassengersDict_22Oct.json"
 pathGroups = "./ST7 -Airfrance - Dynamique/AllGroups_22Oct.json"
-
+current_group = 0
+current_seats = []
 
 with open(pathSeats, "r") as file:
     SeatsAssignOptimDict = json.load(file)
@@ -478,7 +479,7 @@ def Options(group_nbr):
         return All_options, score_choice, score_register
 
 
-def updating(group_nbr, chosenAllocation_nbr):
+def updating(chosenAllocation_nbr, group_nbr=current_group):
 
     choices, _, _ = Options(group_nbr)
 
@@ -505,4 +506,26 @@ def updating(group_nbr, chosenAllocation_nbr):
     )
 
 
-Options(2)
+def options_convert(group_number):
+    global current_group, current_seats
+    current_group = group_number
+    curr = Options(group_number)[0]
+    current_seats = curr
+    new = []
+    conv = ["A", "B", "C", "D", "E", "F"]
+    for seat in curr:
+        if seat[0][1] in {1, 2, 3}:
+            new.append(str(seat[0][0]) + conv[seat[0][1] - 1])
+        else:
+            new.append(str(seat[0][0]) + conv[seat[0][1] - 2])
+
+    return new
+
+
+def updating_convert(chosenAllocation_nbr):
+
+    conv = {"A": 1, "B": 2, "C": 3, "D": 5, "E": 6, "F": 7}
+
+    conv_tuple = [(int(chosenAllocation_nbr[:-1]), conv[chosenAllocation_nbr[-1]])]
+    updating(current_seats.index(conv_tuple), current_group)
+
