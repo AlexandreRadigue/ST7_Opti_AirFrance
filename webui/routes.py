@@ -11,7 +11,7 @@ def index():
     global registered_grp
     if request.method == "POST":
         group_number = request.form.get("group-number")
-        if group_number in registered_grp:
+        if group_number in registered_grp or group_number > 111:
             return render_template(
                 "index.html", message="Group number already registered"
             )
