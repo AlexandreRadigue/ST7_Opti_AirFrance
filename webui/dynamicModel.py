@@ -505,4 +505,4 @@ def updating(group_nbr, chosenAllocation_nbr):
     )
 
 
-Options(2)
+print(Options(65))
