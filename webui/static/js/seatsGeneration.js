@@ -71,5 +71,8 @@ function submitSelectedSeat(event) {
                 window.alert('Seat selected successfully');
                 window.location.href = '/';
             }
+            else {
+                window.alert('Seat already booked');
+            }
         });
 }

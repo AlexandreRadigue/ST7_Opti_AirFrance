@@ -10,7 +10,7 @@ pathSeats = "./ST7 -Airfrance - Dynamique/SeatsDict_22Oct.json"
 pathPassengers = "./ST7 -Airfrance - Dynamique/PassengersDict_22Oct.json"
 pathGroups = "./ST7 -Airfrance - Dynamique/AllGroups_22Oct.json"
 current_group = 0
-current_seats = []
+current_seats = {}
 
 with open(pathSeats, "r") as file:
     SeatsAssignOptimDict = json.load(file)
@@ -40,10 +40,10 @@ max_try = 5
 
 # Uploading df
 
-df_21Oct = pd.read_excel(
-    "./ST7 -Airfrance - Dynamique/DataSeating 2024.xlsx", sheet_name=0, skipfooter=2
+df_22Oct = pd.read_excel(
+    "./ST7 -Airfrance - Dynamique/DataSeating 2024.xlsx", sheet_name=1, skipfooter=2
 )
-df = df_21Oct
+df = df_22Oct
 
 
 def convert_TransitTime(time_val):
@@ -510,21 +510,30 @@ def options_convert(group_number):
     global current_group, current_seats
     current_group = group_number
     curr = Options(group_number)[0]
-    current_seats = curr
     new = []
     conv = ["A", "B", "C", "D", "E", "F"]
-    for seat in curr:
-        if seat[0][1] in {1, 2, 3}:
-            new.append(str(seat[0][0]) + conv[seat[0][1] - 1])
-        else:
-            new.append(str(seat[0][0]) + conv[seat[0][1] - 2])
+
+    for i in range(len(curr)):
+        for seat in curr[i]:
+            if seat[1] in {1, 2, 3}:
+                new.append(str(seat[0]) + conv[seat[1] - 1])
+                current_seats[str(seat[0]) + conv[seat[1] - 1]] = i
+            else:
+                new.append(str(seat[0]) + conv[seat[1] - 2])
+                current_seats[str(seat[0]) + conv[seat[1] - 2]] = i
 
     return new
 
 
 def updating_convert(chosenAllocation_nbr):
+    global current_seats
 
-    conv = {"A": 1, "B": 2, "C": 3, "D": 5, "E": 6, "F": 7}
+    if chosenAllocation_nbr not in current_seats:
+        return True
 
-    conv_tuple = [(int(chosenAllocation_nbr[:-1]), conv[chosenAllocation_nbr[-1]])]
-    updating(current_seats.index(conv_tuple), current_group)
+    updating(current_seats[chosenAllocation_nbr], current_group)
+    current_seats = {}
+    return False
+
+
+print(Options(47))

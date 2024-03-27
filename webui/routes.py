@@ -3,11 +3,19 @@ from dynamicModel import options_convert, updating_convert
 
 app = Flask(__name__)
 
+registered_grp = set()
+
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+    global registered_grp
     if request.method == "POST":
         group_number = request.form.get("group-number")
+        if group_number in registered_grp:
+            return render_template(
+                "index.html", message="Group number already registered"
+            )
+        registered_grp.add(group_number)
         return redirect("/seatmap" + "?groupNumber=" + group_number)
     return render_template("index.html")
 
@@ -22,7 +30,8 @@ def seatmap():
 @app.route("/update_seats", methods=["POST"])
 def update_seats():
     selected_seat = request.json.get("seat")
-    updating_convert(selected_seat)
+    if updating_convert(selected_seat):
+        return jsonify(message="failed")
     return jsonify(message="success")
 
 
