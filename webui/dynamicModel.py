@@ -9,7 +9,8 @@ import pandas as pd
 pathSeats = "./ST7 -Airfrance - Dynamique/SeatsDict_22Oct.json"
 pathPassengers = "./ST7 -Airfrance - Dynamique/PassengersDict_22Oct.json"
 pathGroups = "./ST7 -Airfrance - Dynamique/AllGroups_22Oct.json"
-
+current_group = 0
+current_seats = {}
 
 with open(pathSeats, "r") as file:
     SeatsAssignOptimDict = json.load(file)
@@ -39,10 +40,10 @@ max_try = 5
 
 # Uploading df
 
-df_21Oct = pd.read_excel(
-    "./ST7 -Airfrance - Dynamique/DataSeating 2024.xlsx", sheet_name=0, skipfooter=2
+df_22Oct = pd.read_excel(
+    "./ST7 -Airfrance - Dynamique/DataSeating 2024.xlsx", sheet_name=1, skipfooter=2
 )
-df = df_21Oct
+df = df_22Oct
 
 
 def convert_TransitTime(time_val):
@@ -478,7 +479,7 @@ def Options(group_nbr):
         return All_options, score_choice, score_register
 
 
-def updating(group_nbr, chosenAllocation_nbr):
+def updating(chosenAllocation_nbr, group_nbr=current_group):
 
     choices, _, _ = Options(group_nbr)
 
@@ -505,4 +506,34 @@ def updating(group_nbr, chosenAllocation_nbr):
     )
 
 
-print(Options(65))
+def options_convert(group_number):
+    global current_group, current_seats
+    current_group = group_number
+    curr = Options(group_number)[0]
+    new = []
+    conv = ["A", "B", "C", "D", "E", "F"]
+
+    for i in range(len(curr)):
+        for seat in curr[i]:
+            if seat[1] in {1, 2, 3}:
+                new.append(str(seat[0]) + conv[seat[1] - 1])
+                current_seats[str(seat[0]) + conv[seat[1] - 1]] = i
+            else:
+                new.append(str(seat[0]) + conv[seat[1] - 2])
+                current_seats[str(seat[0]) + conv[seat[1] - 2]] = i
+
+    return new
+
+
+def updating_convert(chosenAllocation_nbr):
+    global current_seats
+
+    if chosenAllocation_nbr not in current_seats:
+        return True
+
+    updating(current_seats[chosenAllocation_nbr], current_group)
+    current_seats = {}
+    return False
+
+
+print(Options(47))
