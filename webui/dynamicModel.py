@@ -5,10 +5,11 @@ import pandas as pd
 
 # from dynamicModel import possible_permutations , scoreAllocation , permutation
 
+date = '21Oct'
+pathSeats = f"./ST7 -Airfrance - Dynamique/Résultats_statique/{date}/SeatsDict_{date}.json"
+pathPassengers = f"./ST7 -Airfrance - Dynamique/Résultats_statique/{date}/PassengersDict_{date}.json"
+pathGroups = f"./ST7 -Airfrance - Dynamique/Résultats_statique/{date}/AllGroups_{date}.json"
 
-pathSeats = "./ST7 -Airfrance - Dynamique/SeatsDict_22Oct.json"
-pathPassengers = "./ST7 -Airfrance - Dynamique/PassengersDict_22Oct.json"
-pathGroups = "./ST7 -Airfrance - Dynamique/AllGroups_22Oct.json"
 current_group = 0
 current_seats = {}
 
@@ -35,15 +36,33 @@ ChosenSeats = set()
 RegisteredGroups = set()
 Passengers_Assign_Dict = PassengersAssignOptimDict.copy()
 Seats_Assign_Dict = SeatsAssignOptimDict.copy()
-max_choices = 5
+max_choices = float('inf')
 max_try = 5
 
 # Uploading df
 
-df_22Oct = pd.read_excel(
-    "./ST7 -Airfrance - Dynamique/DataSeating 2024.xlsx", sheet_name=1, skipfooter=2
-)
-df = df_22Oct
+df_21Oct = pd.read_excel('./ST7 -Airfrance - Dynamique/DataSeating 2024.xlsx', sheet_name=0 , skipfooter=2)
+df_22Oct = pd.read_excel('./ST7 -Airfrance - Dynamique/DataSeating 2024.xlsx', sheet_name=1 , skipfooter=2)
+df_23Oct = pd.read_excel('./ST7 -Airfrance - Dynamique/DataSeating 2024.xlsx', sheet_name=2 , skipfooter=2)
+df_24Oct = pd.read_excel('./ST7 -Airfrance - Dynamique/DataSeating 2024.xlsx', sheet_name=3 , skipfooter=2)
+df_30Oct = pd.read_excel('./ST7 -Airfrance - Dynamique/DataSeating 2024.xlsx', sheet_name=4 , skipfooter=2)
+df_05Nov = pd.read_excel('./ST7 -Airfrance - Dynamique/DataSeating 2024.xlsx', sheet_name=5 , skipfooter=2)
+df_07Nov = pd.read_excel('./ST7 -Airfrance - Dynamique/DataSeating 2024.xlsx', sheet_name=6 , skipfooter=2)
+
+#Display the dataframe
+
+dfs = {
+    '21Oct': df_21Oct,
+    '22Oct': df_22Oct,
+    '23Oct': df_23Oct,
+    '24Oct': df_24Oct,
+    '30Oct': df_30Oct,
+    '05Nov': df_05Nov,
+    '07Nov': df_07Nov
+}
+
+# Access DataFrame based on user's input
+df = dfs.get(date,"Invalid date selection." )
 
 
 def convert_TransitTime(time_val):
@@ -139,7 +158,11 @@ number_of_columns = 7  # a(A B C AISLE D E F)
 
 # Z_old transit
 
-z_old = 4.07
+pathZ_old = f"./ST7 -Airfrance - Dynamique/Résultats_statique/{date}/ObjTransit_{date}.json"
+with open(pathZ_old, "r") as file:
+    z_old_dict = json.load(file)
+
+z_old = z_old_dict['objTransit']
 
 # Parameters
 
