@@ -583,3 +583,6 @@ def updating_convert(chosenAllocation_nbr):
             dispositing[seat] = current_group
     current_seats = {}
     return False
+
+
+print(Options(2))
