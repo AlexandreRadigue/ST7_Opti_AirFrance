@@ -1,12 +1,15 @@
 
-document.addEventListener('DOMContentLoaded', () => {
+window.onload = () => {
     console.log('DOM loaded');
     generateSeatMap();
-});
+}
 
 const values = ['A', 'B', 'C', 'D', 'E', 'F'];
 
 function generateSeatMap() {
+
+    const disp = JSON.parse(disposition)
+
     const seatMapContainer = document.createElement('div');
     seatMapContainer.classList.add('seatmap');
 
@@ -14,20 +17,17 @@ function generateSeatMap() {
     seatsContainer.classList.add('seats');
 
     for (var i = 0; i < 3; i++) {
-        console.log(typeof availableSeats)
-        console.log(availableSeats)
         var row = document.createElement('div');
         row.classList.add('row');
         for (var j = 1; j <= 29; j++) {
             var seat = document.createElement('div');
-            seat.textContent = j + values[i];
-            seat.addEventListener('click', submitSelectedSeat);
             row.appendChild(seat);
-            if (availableSeats.includes(j + values[i])) {
-                seat.classList.add('available');
+            if (disp.hasOwnProperty(j + values[i])) {
+                seat.textContent = disp[j + values[i]];
+                seat.classList.add('taken');
             } else {
+                seat.textContent = "X"
                 seat.classList.add('seat');
-
             }
         }
         seatsContainer.appendChild(row);
@@ -41,13 +41,13 @@ function generateSeatMap() {
         row.classList.add('row');
         for (var j = 1; j <= 29; j++) {
             var seat = document.createElement('div');
-            seat.textContent = j + values[i];
             row.appendChild(seat);
-            seat.addEventListener('click', submitSelectedSeat)
-            if (availableSeats.includes(j + values[i])) {
-                seat.classList.add('available');
-            }
-            else {
+            seat.classList.add('seat');
+            if (disp.hasOwnProperty(j + values[i])) {
+                seat.textContent = disp[j + values[i]];
+                seat.classList.add('taken');
+            } else {
+                seat.textContent = "X"
                 seat.classList.add('seat');
             }
         }
@@ -55,26 +55,4 @@ function generateSeatMap() {
     }
     seatMapContainer.appendChild(seatsContainer);
     document.body.appendChild(seatMapContainer);
-}
-
-function submitSelectedSeat(event) {
-    const seat = event.target;
-    console.log(seat.textContent);
-    fetch('/update_seats', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ seat: seat.textContent })
-    }).then(response => response.json())
-        .then(data => {
-            console.log(data.message);
-            if (data.message === 'success') {
-                window.alert('Seat selected successfully');
-                window.location.href = '/';
-            }
-            else {
-                window.alert('Seat already booked');
-            }
-        });
 }

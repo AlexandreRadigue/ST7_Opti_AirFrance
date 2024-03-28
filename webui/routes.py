@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, redirect, render_template, request
-from dynamicModel import options_convert, updating_convert
+from dynamicModel import options_convert, updating_convert, dispositing
 
 app = Flask(__name__)
 
@@ -34,6 +34,11 @@ def update_seats():
     if updating_convert(selected_seat):
         return jsonify(message="failed")
     return jsonify(message="success")
+
+
+@app.route("/current", methods=["GET"])
+def current():
+    return render_template("current.html", disposition=dispositing)
 
 
 if __name__ == "__main__":

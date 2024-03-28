@@ -97,3 +97,20 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #0056b3;
 }
+
+.taken {
+    background-color: #b9f6ca;
+    border: 1px solid #999;
+    padding: 0.6rem;
+    margin: 5px 0;
+    width: 1.8rem;
+    height: 40px;
+    line-height: 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 0.05rem 0.05rem;
+}
+
+.taken:hover {
+    background-color: #96e6a1;
+}
