@@ -2,10 +2,10 @@ body {
     font-family: Arial, sans-serif;
     background-image: url(https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3);
     /* Specify the path to your image */
-    background-size: cover;
+    background-size: 100%;
     /* Cover the entire background */
     background-position: center top 50px;
-    /* Center the background image */
+    background-repeat: no-repeat;
     margin: 0;
     padding: 0;
 }
@@ -16,6 +16,7 @@ header {
     display: flex;
     justify-content: left;
     align-items: center;
+    width: 100%;
 }
 
 .logo {
