@@ -36,7 +36,7 @@ ChosenSeats = set()
 RegisteredGroups = set()
 Passengers_Assign_Dict = PassengersAssignOptimDict.copy()
 Seats_Assign_Dict = SeatsAssignOptimDict.copy()
-max_choices = float('inf')
+max_choices = 5
 max_try = 5
 
 # Uploading df
@@ -557,3 +557,6 @@ def updating_convert(chosenAllocation_nbr):
     updating(current_seats[chosenAllocation_nbr], current_group)
     current_seats = {}
     return False
+
+
+print(Options(2))
