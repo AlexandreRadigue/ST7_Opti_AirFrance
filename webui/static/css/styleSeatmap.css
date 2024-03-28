@@ -2,14 +2,17 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+
 }
 
 header {
+    box-sizing: border-box;
     background-color: #333;
-    padding: 10px 0;
+    padding: 1rem 0;
     display: flex;
     justify-content: left;
     align-items: center;
+    width: 100rem;
 }
 
 .logo {
@@ -53,8 +56,8 @@ h1 {
 .seatmap {
     display: inline-block;
     margin-top: 80px;
-    margin-left: 5px;
-    margin-right: 10px;
+    margin-left: 1.5rem;
+    margin-right: 0.5rem;
     text-align: center;
 }
 
@@ -77,14 +80,14 @@ h1 {
 .seat {
     background-color: #ccc;
     border: 1px solid #999;
-    padding: 10px;
+    padding: 0.6rem;
     margin: 5px 0;
-    width: 30px;
+    width: 1.8rem;
     height: 40px;
     line-height: 20px;
     cursor: pointer;
     border-radius: 4px;
-    margin: 0.5px 0.5px;
+    margin: 0.05rem 0.05rem;
 }
 
 .seat:hover {
@@ -95,14 +98,14 @@ h1 {
 .available {
     background-color: #b9f6ca;
     border: 1px solid #999;
-    padding: 10px;
+    padding: 0.6rem;
     margin: 5px 0;
-    width: 30px;
+    width: 1.8rem;
     height: 40px;
     line-height: 20px;
     cursor: pointer;
     border-radius: 4px;
-    margin: 0.5px 0.5px;
+    margin: 0.05rem 0.05rem;
 }
 
 .available:hover {
