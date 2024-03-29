@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const values = ['A', 'B', 'C', 'D', 'E', 'F'];
+const AvailableSeats = JSON.parse(availableSeats);
 
 function generateSeatMap() {
     const seatMapContainer = document.createElement('div');
@@ -13,9 +14,8 @@ function generateSeatMap() {
     const seatsContainer = document.createElement('div');
     seatsContainer.classList.add('seats');
 
+
     for (var i = 0; i < 3; i++) {
-        console.log(typeof availableSeats)
-        console.log(availableSeats)
         var row = document.createElement('div');
         row.classList.add('row');
         for (var j = 1; j <= 29; j++) {
@@ -23,7 +23,10 @@ function generateSeatMap() {
             seat.textContent = j + values[i];
             seat.addEventListener('click', submitSelectedSeat);
             row.appendChild(seat);
-            if (availableSeats.includes(j + values[i])) {
+            if (i === 0 && j == 2) {
+                console.log(AvailableSeats.includes(j + values[i]))
+            }
+            if (AvailableSeats.includes(j + values[i])) {
                 seat.classList.add('available');
             } else {
                 seat.classList.add('seat');
@@ -44,7 +47,7 @@ function generateSeatMap() {
             seat.textContent = j + values[i];
             row.appendChild(seat);
             seat.addEventListener('click', submitSelectedSeat)
-            if (availableSeats.includes(j + values[i])) {
+            if (AvailableSeats.includes(j + values[i])) {
                 seat.classList.add('available');
             }
             else {

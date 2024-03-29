@@ -5,7 +5,7 @@ window.onload = function () {
 
     form.addEventListener("submit", function (event) {
         var groupNumber = parseInt(groupNumberInput.value);
-        if (isNaN(groupNumber) || groupNumber % 1 !== 0 || groupNumber == 0) {
+        if (isNaN(groupNumber) || groupNumber % 1 !== 0 || groupNumber == 0 || groupNumber > 111) {
             errorMessage.style.display = "inline";
             errorMessage.textContent = "Please enter a valid group number";
             event.preventDefault();
@@ -13,11 +13,9 @@ window.onload = function () {
             errorMessage.style.display = "none";
         }
     });
-};
-
-document.addEventListener('DOMContentLoaded', () => {
-    if (message === "Group number already registered") {
+    const Message = JSON.parse(message)
+    if (Message === "Group number already registered") {
         errorMessage.style.display = "inline";
-        errorMessage.textContent = message;
+        errorMessage.textContent = Message;
     }
-});
+};

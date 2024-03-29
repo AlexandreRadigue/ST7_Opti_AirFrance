@@ -8,14 +8,14 @@ registered_grp = set()
 
 @app.route("/", methods=["GET"])
 def index():
-    return render_template("index.html")
+    return render_template("index.html", message="")
 
 
 @app.route("/", methods=["POST"])
 def registering():
     global registered_grp
     group_number = request.form.get("group-number")
-    if group_number in registered_grp or int(group_number) > 111:
+    if group_number in registered_grp:
         return render_template("index.html", message="Group number already registered")
     registered_grp.add(group_number)
     return redirect("/seatmap" + "?groupNumber=" + group_number)

@@ -563,26 +563,26 @@ def options_convert(group_number):
         for seat in curr[i]:
             if seat[1] in {1, 2, 3}:
                 new.append(str(seat[0]) + conv[seat[1] - 1])
-                current_seats[str(seat[0]) + conv[seat[1] - 1]] = i
+                if str(seat[0]) + conv[seat[1] - 1] in current_seats:
+                    current_seats[str(seat[0]) + conv[seat[1] - 1]].add(i + 1)
+                else:
+                    current_seats[str(seat[0]) + conv[seat[1] - 1]] = {i + 1}
             else:
                 new.append(str(seat[0]) + conv[seat[1] - 2])
-                current_seats[str(seat[0]) + conv[seat[1] - 2]] = i
-
+                if str(seat[0]) + conv[seat[1] - 2] in current_seats:
+                    current_seats[str(seat[0]) + conv[seat[1] - 2]].add(i + 1)
+                else:
+                    current_seats[str(seat[0]) + conv[seat[1] - 2]] = {i + 1}
     return new
 
 
 def updating_convert(chosenAllocation_nbr):
     global current_seats, dispositing
-
     if chosenAllocation_nbr not in current_seats:
         return True
-
-    updating(current_seats[chosenAllocation_nbr], current_group)
+    updating(list(current_seats[chosenAllocation_nbr])[0], current_group)
     for seat in current_seats:
-        if current_seats[seat] == current_seats[chosenAllocation_nbr]:
+        if list(current_seats[chosenAllocation_nbr])[0] in current_seats[seat]:
             dispositing[seat] = current_group
     current_seats = {}
     return False
-
-
-print(Options(2))
